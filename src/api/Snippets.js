@@ -1,0 +1,41 @@
+//import * as localForage from "localforage";
+import * as axios from "axios";
+
+class NeoSDK {
+	constructor({url = "https://fullrav.herokuapp.com", token = "AIzaSyBhQRUK8k48eGrNNlj4iOk7MM78-sCh_nQ"} = {}) {
+		this.url = url;
+		this.token = token;
+	}
+	//================================================================================
+	async getAllNodes() {
+		try {
+			return (await axios.request({url: `/neo/all-nodes`, method: "GET", baseURL: this.url})).data;
+		} catch (e) {
+			console.log(e.message);
+			throw new Error(e);
+		}
+	}
+	//================================================================================
+	async getNodesByLabel({label, groupBy}) {
+		try {
+			return (await axios.request({url: `/neo/label`, method: "GET", baseURL: this.url, params: {name: label, groupBy: groupBy}})).data;
+		} catch (e) {
+			console.log(e.message);
+			throw new Error(e);
+		}
+	}
+	//================================================================================
+}
+export class Snippet extends NeoSDK {
+	constructor() {
+		super();
+	}
+
+	async getAll() {
+		try {
+			return await this.getNodesByLabel({label: "Snippet"});
+		} catch (err) {
+			throw err;
+		}
+	}
+}
