@@ -59,6 +59,7 @@
   let searchBarValue = ""
   let snippet = new Snippet()
   let snippets = []
+  let testFromGithubWeb = ""
  
   $ : filteredItems = snippets
   function onSearchBarChange(e){
