@@ -9,9 +9,13 @@ export let user = writable({
 });
 
  let plab = new Plabable({username: "ravitemer"});
-await plab.getSubjects()
+ export let plabable = writable({
+  subjects : plab.subjects,
+  });
+plab.getSubjects().then(
+    (subjects) => {
+      plabable.set({subjects})}
+)
 
 
-export let plabable = writable({
-subjects : plab.subjects,
-});
+
