@@ -1,4 +1,4 @@
-<Page name="home">
+<Page  name="home">
   <!-- Top Navbar -->
   <Navbar noHairline  sliding={false}>
     <NavLeft>
@@ -7,19 +7,10 @@
     <NavRight>
       <Link searchbarEnable=".searchbar-demo"><i class="f7-icons text-slate-400">search</i></Link>
     </NavRight>
-      <Searchbar class="searchbar-demo" expandable bind:value={searchBarValue} customSearch onInput="{onSearchBarChange}"/>
-
-
+      <!-- <Searchbar class="searchbar-demo" expandable bind:value={searchBarValue} customSearch onInput="{onSearchBarChange}"/> -->
   </Navbar>
 
-  <List>
-    {#each filteredItems as {properties},i (i)}
-       <ListItem title='{properties.title}'  after='{properties.category}'></ListItem>
-    {:else}
-       Emoty
-    {/each}
-    
-  </List>
+  <Custom {...custom}/>
   <!-- Toolbar -->
   <Toolbar bottom>
     <i class="f7-icons m-1 size-22 text-rose-400">house_fill</i>
@@ -31,12 +22,14 @@
 
 
   </Toolbar>
-  <!-- Page content -->
+  <!--svelte each block for categories-->
+
   
 </Page>
 <script>
   import {onMount} from "svelte";
   import {Snippet} from '../api'
+  import Custom from '../components/Custom.svelte'
   import {
     Page,
     Navbar,
@@ -45,6 +38,7 @@
     NavTitleLarge,
     NavRight,
     Link,
+    Fab,
     Subnavbar,
     Searchbar,
     Toolbar,
@@ -57,23 +51,36 @@
     Button
   } from 'framework7-svelte';
   let searchBarValue = ""
-  let snippet = new Snippet()
-  let snippets = []
-  let testFromGithubWeb = ""
- 
-  $ : filteredItems = snippets
-  function onSearchBarChange(e){
-    //console.log(e.target.value);
-    filteredItems = snippets.filter(snip => snip.properties.title.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1)
+  let custom = {
 
   }
-  onMount(async () => {
-    snippets = await snippet.getAll()
-  })
+  
+
+
+  let colors = ["bg-red-400","bg-orange-400","bg-yellow-400","bg-green-400","bg-teal-400","bg-blue-400","bg-indigo-400","bg-purple-400","bg-pink-400"]
 </script>
 <style>
 
   .logo {
     @apply font-bold font-serif text-2xl text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-red-600;
   }
+
+/*apply horizontal tailwind grid scroll to .horizontal-scroll-view*/
+
+
+/*horizontal scrolling div*/
+  
+    .horizontal-scroll-view {
+      @apply w-full flex overflow-x-scroll;
+    }
+    .card {
+width: 161px;
+height: 157px;
+
+flex-shrink: 0;
+background: #ED6949;
+border-radius: 30px;
+    }
+
+
 </style>
