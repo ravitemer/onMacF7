@@ -1,7 +1,4 @@
 <script>
-import { data } from "dom7";
-
-
     import { onMount } from "svelte";
     export let question = {}
     let showAnswer = true
