@@ -109,7 +109,7 @@
 
 
   import routes from '../js/routes';
-  import store from '../js/store';
+  
 
 
   // Framework7 Parameters
@@ -120,7 +120,6 @@
 
 
     // App store
-    store: store,
     // App routes
     routes: routes,
     // Register service worker (only on production build)

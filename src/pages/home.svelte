@@ -2,15 +2,17 @@
   <!-- Top Navbar -->
   <Navbar noHairline  sliding={false}>
     <NavLeft>
-      <span class='ml-w logo'>Snippets</span>
+      <span class='ml-w logo'>{$subject.title}</span>
     </NavLeft>
     <NavRight>
-      <Link searchbarEnable=".searchbar-demo"><i class="f7-icons text-slate-400">search</i></Link>
+      <Link  popupOpen=".popup-subjects"><i class="f7-icons text-slate-400">arrow_swap</i></Link>
     </NavRight>
       <!-- <Searchbar class="searchbar-demo" expandable bind:value={searchBarValue} customSearch onInput="{onSearchBarChange}"/> -->
   </Navbar>
-
-  <Custom {...custom}/>
+{#key $subject.title}
+<Custom {...custom}/>
+{/key}
+  
   <!-- Toolbar -->
   <Toolbar bottom>
     <i class="f7-icons m-1 size-22 text-rose-400">house_fill</i>
@@ -23,15 +25,28 @@
 
   </Toolbar>
   <!--svelte each block for categories-->
+  <Popup swipeToClose push bind:this={popup} class="popup-subjects">
+     <Page>
+        <Navbar title="Subjects" sliding={false}>
+        </Navbar>
+        <List inset>
+          {#each Object.entries($plabable.subjects) as [sub,value],i}
+          <ListItem title={sub} href="#" onClick={ async () => await changeSubject(sub)} />
+          {/each}
+        </List>
+     </Page>
+  </Popup>
 
   
 </Page>
 <script>
   import {onMount} from "svelte";
-  import {Snippet} from '../api'
+  import { Snippet} from '../api'
+  import {subject,user,plabable} from '../js/store'
   import Custom from '../components/Custom.svelte'
   import {
     Page,
+    Popup,
     Navbar,
     NavLeft,
     NavTitle,
@@ -51,10 +66,17 @@
     Button
   } from 'framework7-svelte';
   let searchBarValue = ""
-  let custom = {
-
+  $ : custom = {
+     subject : $subject.title,
   }
-  
+  let popup 
+   async function changeSubject(sub){
+    $subject = {title:sub}
+    if (popup){
+      popup.instance().close()
+    }
+    
+  }
 
 
   let colors = ["bg-red-400","bg-orange-400","bg-yellow-400","bg-green-400","bg-teal-400","bg-blue-400","bg-indigo-400","bg-purple-400","bg-pink-400"]
