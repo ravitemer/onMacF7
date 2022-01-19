@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+no safari scrollbars css
+*/
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
