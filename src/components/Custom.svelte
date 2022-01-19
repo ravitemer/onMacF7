@@ -4,6 +4,7 @@ import {f7,BlockTitle} from "framework7-svelte"
 export let subject = "Anatomy";
 export let username = "ravitemer";
 import Question from './Question.svelte';
+import Gem from './Gem.svelte';
 import { FirebaseDB,Plabable} from "../api";
 let items = [
   {index:1,title:"Plabable",icon:"person"},
@@ -55,6 +56,12 @@ Materials
 </div>
 
 <div class="block-title-large mx-4 mt-4">
+    Gems
+        </div>
+    <Gem {question}/>
+    
+
+<div class="block-title-large mx-4 mt-4">
 Revision
     </div>
 <Question {question}/>
@@ -74,6 +81,6 @@ Revision
         @apply overflow-x-scroll w-full  flex flex-shrink-0;
     }
     .card {
-        @apply w-1/3 h-24  flex items-center justify-center flex-shrink-0 text-xl rounded-xl font-medium  md:rounded-2xl border overflow-hidden break-all border-zinc-800; 
+        @apply w-1/3 p-4 max-w-md min-w-max h-24  flex items-center justify-center flex-shrink-0 text-xl rounded-xl font-medium  md:rounded-2xl border overflow-hidden break-all border-zinc-800; 
     }
 </style>
