@@ -6,8 +6,7 @@
 no safari scrollbars css
 */
 
-::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
+:root ::-webkit-scrollbar {
+display: none;
 }
 

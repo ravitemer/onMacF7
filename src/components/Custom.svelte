@@ -186,7 +186,7 @@ Questions
         @apply overflow-x-scroll w-full  flex ;
     }
     .card {
-        @apply w-1/3 p-4 max-w-md h-24 bg-contain bg-center bg-no-repeat bg-blend-darken flex items-center justify-center flex-shrink-0 text-xl rounded-xl font-medium  md:rounded-2xl border overflow-hidden break-all border-zinc-800; 
+        @apply md:w-1/3 w-44 p-4 max-w-md h-24 bg-contain bg-center bg-no-repeat bg-blend-darken flex items-center justify-center flex-shrink-0 text-xl rounded-xl font-medium  md:rounded-2xl border overflow-hidden break-all border-zinc-800; 
     }
     .card-image {
 
