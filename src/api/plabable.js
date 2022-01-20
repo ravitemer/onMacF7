@@ -34,7 +34,7 @@ export class Plabable {
     async getBookmarkedQuestions({username=this.username,subject}){
         try {
             let [subjectData,allQs] = await Promise.all([
-                this.db.getItem(`/Users/${username}/plabable/subjects/${subject}`),
+                this.db.getItem(`/Users/${username}/Plabable/subjects/${subject}`),
                 this.db.getItem(`Plabable/subjects/${subject}/questions`),
             ]) 
             let questions = subjectData.bookmarks || {};
@@ -55,7 +55,7 @@ export class Plabable {
 
        async  getWrongQuestions({username=this.username,subject}){
         let [subjectData,allQs] = await Promise.all([
-            this.db.getItem(`/Users/${username}/plabable/subjects/${subject}`),
+            this.db.getItem(`/Users/${username}/Plabable/subjects/${subject}`),
             this.db.getItem(`Plabable/subjects/${subject}/questions`),
         ]) 
         let questions = subjectData.questions;
