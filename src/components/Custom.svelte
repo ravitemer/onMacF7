@@ -1,6 +1,6 @@
 <script>
 import { onMount } from 'svelte';
-import {f7,BlockTitle} from "framework7-svelte"
+import {f7,Popup, Page,NavLeft,NavRight,Navbar,NavTitle,Link} from "framework7-svelte"
 export let subject = "Anatomy";
 export let username = "ravitemer";
 import Question from './Question.svelte';
@@ -11,13 +11,18 @@ import { FirebaseDB,Plabable} from "../api";
 // let url = "https://cdn-icons-png.flaticon.com/512/6643/6643396.png";  
 //random number generator
 let random = 6643396 ;
-let url  = () => `https://cdn-icons-png.flaticon.com/512/6643/${random + Math.floor(Math.random() * 10)}.png`;
+let x = 0
+let url  = () => {
+    x++ 
+    console.log(x)
+    return `https://cdn-icons-png.flaticon.com/512/6643/${random + Math.floor(Math.random() * 10)}.png`;};
 let items = [
   {index:1,title:"Plabable",icon:"person",url:url()},
     {index:2,title:"Plabverse",icon:"bookmark",url:url()},
     {index:3,title:"Plab Keys",icon:"person",url:url()},
 ]
-let questionBanks = [
+
+$: questionBanks = [
     {index:1,title:"Plabable",icon:"person",url:url()},
         {index:2,title:"Bookmarks",icon:"bookmark",url:url()},
         {index:3,title:"Gems",icon:"person",url:url()},
@@ -34,6 +39,9 @@ let bookmarkedQuestions = [];
 let currentIndex = 0;
 let normalQIndex = 0
 let bookmarkIndex = 0
+function onQBankClick(item){
+ console.log(item.popup.instance().open())
+}
 
 $: question = {...wrongQuestions[currentIndex], next() {
   currentIndex++;
@@ -83,6 +91,7 @@ $: plabQuestion = {...allQuestions[normalQIndex], next() {
     return allQuestions[normalQIndex]
   }
 }
+
 onMount(async () => {
    wrongQuestions = await plabable.getWrongQuestions({subject:subject})
    allQuestions = await plabable.getQuestions({subject:subject})
@@ -111,43 +120,54 @@ Materials
        </div>
   {/each}
 </div>
+
+<!-- <Question question={bookmarkQuestion}/>
+    <Question question={plabQuestion}/>
+    <Gem  {subject}/>
+    <Question {question}/> -->
+
 <div class="block-title-large mx-4 mt-4">
 Questions
     </div>
     <div class="HStack">
       {#each questionBanks as item, i  (i)} 
-           <div style="background-image: url({item.url});" class="card link {tailwindColors[i]}">
+           <div on:click={() => onQBankClick(item)} style="background-image: url({item.url});" class="card link {tailwindColors[i]}">
     {item.title}
            </div>
+           <Popup bind:this={item.popup}>
+            <Page>
+                <Navbar>
+                    <NavTitle>
+                        {item.title}
+                    </NavTitle>
+                    <NavRight>
+                        <Link popupClose>Close</Link>
+                    </NavRight>
+                </Navbar>
+                {#if item.title == "Plabable"}
+                <Question question={plabQuestion}/>
+                {:else if item.title == "Bookmarks"}
+                <Question question={bookmarkQuestion}/>
+                {:else if item.title == "Gems"}
+                <Gem  {subject}/>
+                {:else}
+                <Question {question}/>
+                {/if}
+            </Page>
+        </Popup>
       {:else}
            <div class="card">
-               No Questions
+               No Question Banks
            </div>
       {/each}
     </div>
-    
-<div class="block-title-large mx-4 mt-4">
-    Bookmarks
-        </div>
-    <Question question={bookmarkQuestion}/>
 
-
-<div class="block-title-large mx-4 mt-4">
-    Plabable
-        </div>
-    <Question question={plabQuestion}/>
-
-<div class="block-title-large mx-4 mt-4">
-    Gems
-        </div>
-    <Gem {subject}/>
+    <!--Framework7 Popup svelte-->
     
 
-<div class="block-title-large mx-4 mt-4">
-Revision
-    </div>
-<Question {question}/>
-
+    
+    
+    
     
     
 
