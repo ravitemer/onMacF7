@@ -42,8 +42,9 @@
 <script>
   import {onMount} from "svelte";
   import { Snippet} from '../api'
-  import {subject,user,plabable} from '../js/store'
+  import {subject,plab,user,plabable} from '../js/store'
   import Custom from '../components/Custom.svelte'
+
   import {
     Page,
     Popup,
@@ -70,6 +71,8 @@
    async function changeSubject(sub){
     // $subject.title = sub
     $subject = sub
+    await plab.db.setItem(`Users/${$user.username}/Plabable/currentSubject`,sub.title)
+    
     if (popup){
       popup.instance().close()
     }    
@@ -81,7 +84,7 @@
 <style>
 
   .logo {
-    @apply font-bold font-serif text-2xl text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-red-600;
+    @apply font-medium  text-xl text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-red-600 ml-2;
   }
 
 /*apply horizontal tailwind grid scroll to .horizontal-scroll-view*/

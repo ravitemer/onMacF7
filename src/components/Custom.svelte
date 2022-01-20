@@ -27,16 +27,10 @@ let materials = [
     {index:3,title:"Plab Keys",icon:"person",url:url(),driveId:subject.materials["Plab Keys"]?.driveId || "ok"},
 ]
 
-$: questionBanks = [
-    {index:1,title:"Plabable",icon:"person",url:url()},
-        {index:2,title:"Bookmarks",icon:"bookmark",url:url()},
-        {index:3,title:"Gems",icon:"person",url:url()},
-        {index:3,title:"Wrong",icon:"wrong",url:url()},
-    ]
 
 let plabable = new Plabable({username});
-let tailwindColors = ["bg-red-400","bg-green-400","bg-blue-400","bg-indigo-400","bg-purple-400","bg-pink-400"]
-let tailwindTextColors = ["text-red-500","text-green-500","text-blue-500","text-indigo-500","text-purple-500","text-pink-500"]
+let tailwindColors = ["bg-orange-400","bg-green-400","bg-blue-400","bg-indigo-400","bg-purple-400","bg-pink-400","bg-red-400","bg-teal-400","bg-gray-400"]
+let tailwindTextColors = ["text-orange-500","text-green-500","text-blue-500","text-indigo-500","text-purple-500","text-pink-500","text-red-500","text-teal-500","text-gray-500"]
 let wrongQuestions = [];
 let allQuestions = [];
 let bookmarkedQuestions = [];
@@ -50,6 +44,13 @@ function onQBankClick(item){
 function onMaterialClick(item){
  item.popup.instance().open()
 }
+$: questionBanks = [
+    {index:1,title:"Plabable",icon:"person",url:url()},
+        {index:2,title:"Bookmarks",icon:"bookmark",url:url()}, 
+        {index:3,title:"Gems",icon:"person",url:url()},
+        {index:3,title:"Wrong",icon:"wrong",url:url()},
+    ]
+
 $: question = {...wrongQuestions[currentIndex], next() {
   currentIndex++;
   if(currentIndex >= wrongQuestions.length){
