@@ -225,10 +225,10 @@ Questions
         @apply overflow-x-scroll w-full  flex  p-4;
     }
     .card {
-        @apply md:w-1/3 w-44 p-4 max-w-md h-24 bg-contain bg-center bg-no-repeat bg-blend-multiply flex items-center justify-center flex-shrink-0 text-xl rounded-xl font-medium  md:rounded-2xl border overflow-hidden break-all border-zinc-800 m-0; 
+        @apply w-full p-4 max-w-md h-24 bg-contain bg-center bg-no-repeat bg-blend-multiply flex items-center justify-center flex-shrink-0 text-xl rounded-xl font-medium  md:rounded-2xl border overflow-hidden break-all border-zinc-800 m-0; 
     }
     .card-con {
-        @apply flex flex-col justify-center items-start mr-4 gap-1;
+        @apply md:w-1/3 w-44 flex flex-col justify-center items-start mr-4 gap-1 flex-shrink-0;
     }
     .card-stats {
         @apply flex flex-col justify-center items-start;
