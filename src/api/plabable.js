@@ -24,7 +24,7 @@ export class Plabable {
     //get questions from firebase in a subject 
     async getQuestions({username=this.username,subject}){
         try {
-            let questions = await this.db.getItem(`/plabable/${subject}`)
+            let questions = await this.db.getItem(`/Plabable/subjects/${subject}/questions`)
             return questions
         } catch (error) {
             throw error
@@ -35,7 +35,7 @@ export class Plabable {
         try {
             let [subjectData,allQs] = await Promise.all([
                 this.db.getItem(`/Users/${username}/plabable/subjects/${subject}`),
-                this.db.getItem(`plabable/${subject}`),
+                this.db.getItem(`Plabable/subjects/${subject}/questions`),
             ]) 
             let questions = subjectData.bookmarks || {};
             let bookmarkedQs = Object.entries(questions).map(([id,value])=> {
@@ -56,7 +56,7 @@ export class Plabable {
        async  getWrongQuestions({username=this.username,subject}){
         let [subjectData,allQs] = await Promise.all([
             this.db.getItem(`/Users/${username}/plabable/subjects/${subject}`),
-            this.db.getItem(`plabable/${subject}`),
+            this.db.getItem(`Plabable/subjects/${subject}/questions`),
         ]) 
         let questions = subjectData.questions;
         // filter questions by !isCorrect
