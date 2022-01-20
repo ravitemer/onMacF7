@@ -4,7 +4,7 @@ export class Plabable {
     constructor({username}) {
         this.db = new FirebaseDB()
         this.username = username
-        this.subjects = {}
+        this.subjects = []
        }
     async getSubjects() {
         try {
@@ -16,6 +16,7 @@ export class Plabable {
 							}
 						})
 					this.subjects = subjects
+                    
             return subjects
         } catch (error) {       
             throw error
