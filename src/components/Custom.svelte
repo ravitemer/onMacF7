@@ -12,11 +12,14 @@ import { FirebaseDB,Plabable} from "../api";
 //random number generator
 let random = 6643396 ;
 let x = 0
+function driveUrl(id = "") {
+		return `https://drive.google.com/uc?export=download&id=${id}`;
+	}
 let url  = () => {
     x++ 
     console.log(x)
     return `https://cdn-icons-png.flaticon.com/512/6643/${random + Math.floor(Math.random() * 10)}.png`;};
-let items = [
+let materials = [
   {index:1,title:"Plabable",icon:"person",url:url()},
     {index:2,title:"Plabverse",icon:"bookmark",url:url()},
     {index:3,title:"Plab Keys",icon:"person",url:url()},
@@ -31,7 +34,7 @@ $: questionBanks = [
 
 let plabable = new Plabable({username});
 let tailwindColors = ["bg-red-400","bg-green-400","bg-blue-400","bg-indigo-400","bg-purple-400","bg-pink-400"]
-
+let tailwindTextColors = ["text-red-500","text-green-500","text-blue-500","text-indigo-500","text-purple-500","text-pink-500"]
 let wrongQuestions = [];
 let allQuestions = [];
 let bookmarkedQuestions = [];
@@ -42,7 +45,9 @@ let bookmarkIndex = 0
 function onQBankClick(item){
  console.log(item.popup.instance().open())
 }
-
+function onMaterialClick(item){
+ console.log(item.popup.instance().open())
+}
 $: question = {...wrongQuestions[currentIndex], next() {
   currentIndex++;
   if(currentIndex >= wrongQuestions.length){
@@ -104,16 +109,37 @@ onMount(async () => {
 </script>
 <div class="container">
 
-<div class="block-title-large mx-4 mt-4">
+<div class="block-title-medium mx-4 mt-4">
 Materials
 </div>
 <div class="HStack">
-  {#each items as item, i  (i)} 
-       <div style="background-image: url({item.url});" class="card link {tailwindColors[i]}">
-
-{item.title}
+  {#each materials as item, i  (i)} 
+  <div on:click={() => onMaterialClick(item)} class="card-con">
+    <div  style="background-image: url({item.url});" class="card link {tailwindColors[i]}">
+    </div>
+    <div class="card-stats">
+        <div class="card-subtitle {tailwindTextColors[i]}">
+            
+        </div>
+        <div class="card-title link">
+            {item.title}
+            </div>
+    </div>
 
        </div>
+       <Popup bind:this={item.popup}>
+        <Page>
+            <Navbar noHairline noShadow>
+                <NavTitle>
+                    {item.title}
+                </NavTitle>
+                <NavRight>
+                    <Link popupClose>Close</Link>
+                </NavRight>
+            </Navbar>
+            <iframe title="pdf" src={`https://drive.google.com/file/d/${item.driveId}/preview`} width="100%" height="100%" />
+        </Page>
+    </Popup>
   {:else}
        <div class="card">
            No Materials
@@ -126,14 +152,25 @@ Materials
     <Gem  {subject}/>
     <Question {question}/> -->
 
-<div class="block-title-large mx-4 mt-4">
+<div class="block-title-medium mx-4 mt-4">
 Questions
     </div>
     <div class="HStack">
       {#each questionBanks as item, i  (i)} 
-           <div on:click={() => onQBankClick(item)} style="background-image: url({item.url});" class="card link {tailwindColors[i]}">
-    {item.title}
-           </div>
+      <div on:click={() => onQBankClick(item)} class="card-con">
+        <div  style="background-image: url({item.url});" class="card link {tailwindColors[i+3]}">
+        </div>
+        <div class="card-stats">
+            <div class="card-subtitle {tailwindTextColors[i + 3]}">
+                {item.title}
+            </div>
+            <div class="card-title link">
+                {item.title}
+                </div>
+        </div>
+        
+      </div>
+           
            <Popup bind:this={item.popup}>
             <Page>
                 <Navbar>
@@ -183,12 +220,21 @@ Questions
         @apply h-full w-full overflow-y-scroll;
     }
     .HStack{
-        @apply overflow-x-scroll w-full  flex ;
+        @apply overflow-x-scroll w-full  flex  p-4;
     }
     .card {
-        @apply md:w-1/3 w-44 p-4 max-w-md h-24 bg-contain bg-center bg-no-repeat bg-blend-darken flex items-center justify-center flex-shrink-0 text-xl rounded-xl font-medium  md:rounded-2xl border overflow-hidden break-all border-zinc-800; 
+        @apply md:w-1/3 w-44 p-4 max-w-md h-24 bg-contain bg-center bg-no-repeat bg-blend-multiply flex items-center justify-center flex-shrink-0 text-xl rounded-xl font-medium  md:rounded-2xl border overflow-hidden break-all border-zinc-800 m-0; 
     }
-    .card-image {
-
+    .card-con {
+        @apply flex flex-col justify-center items-start mr-4 gap-1;
+    }
+    .card-stats {
+        @apply flex flex-col justify-center items-start;
+    }
+    .card-subtitle {
+        @apply text-sm font-semibold;
+    }
+    .card-title {
+        @apply text-center text-lg font-medium;
     }
 </style>
