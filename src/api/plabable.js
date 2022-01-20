@@ -15,6 +15,34 @@ export class Plabable {
             throw error
         }   
     }
+    //get questions from firebase in a subject 
+    async getQuestions({username=this.username,subject}){
+        try {
+            let questions = await this.db.getItem(`/plabable/${subject}`)
+            return questions
+        } catch (error) {
+            throw error
+        }
+    }
+    //get bookmarked questions from firebase in a subject
+    async getBookmarkedQuestions({username=this.username,subject}){
+        try {
+            let [subjectData,allQs] = await Promise.all([
+                this.db.getItem(`/Users/${username}/plabable/subjects/${subject}`),
+                this.db.getItem(`plabable/${subject}`),
+            ]) 
+            let questions = subjectData.bookmarks || {};
+            let bookmarkedQs = Object.entries(questions).map(([id,value])=> {
+                // let isWrong = Object.values(q).filter(x => !x.isCorrect).length > 0;
+              return {...allQs[id],id,bookmarked: value}   
+            })
+            // let questions = (await this.db.getItem(`/Users/${username}/plabable/subjects/${subject}/bookmarks`))
+            return bookmarkedQs
+        } catch (error) {
+            throw error
+        }
+    }
+
 
 
 

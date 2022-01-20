@@ -8,6 +8,7 @@
         
 </script>
 <div class="question-con">
+    {#if question.question}
     <div class="buttons">
     <button class="button" on:click={() => question = question.prev()}> 
         Prev Question
@@ -33,6 +34,11 @@
     </div>
 {/if}
 
+{:else}
+    <div class="question text-xl text-center">
+        No Questions
+    </div>
+{/if}
 
 </div>
 
@@ -51,6 +57,7 @@
         @apply text-base md:text-xl  ;
     }
     .answer {
+    
         @apply text-base text-sm   ;
     }
     .buttons {
@@ -59,5 +66,4 @@
     .button {
         @apply text-green-600 text-base md:text-xl  ;
     }
-    
 </style>
