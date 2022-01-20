@@ -1,12 +1,14 @@
 <script>
 import { onMount } from 'svelte';
 import {f7,Popup, Page,NavLeft,NavRight,Navbar,NavTitle,Link} from "framework7-svelte"
-export let subject = "Anatomy";
+export let subject = {title:"Anatomy",materials:{}}
 export let username = "ravitemer";
 import Question from './Question.svelte';
 import Gem from './Gem.svelte';
 import { FirebaseDB,Plabable} from "../api";
-
+function log(node,params){
+    console.log("hello")
+}
 //svg url to show on card
 // let url = "https://cdn-icons-png.flaticon.com/512/6643/6643396.png";  
 //random number generator
@@ -20,9 +22,9 @@ let url  = () => {
     console.log(x)
     return `https://cdn-icons-png.flaticon.com/512/6643/${random + Math.floor(Math.random() * 10)}.png`;};
 let materials = [
-  {index:1,title:"Plabable",icon:"person",url:url()},
-    {index:2,title:"Plabverse",icon:"bookmark",url:url()},
-    {index:3,title:"Plab Keys",icon:"person",url:url()},
+  {index:1,title:"Plabable",icon:"person",url:url(),driveId:subject.materials["Plabable"]?.driveId || "ok"},
+    {index:2,title:"Plabverse",icon:"bookmark",url:url(),driveId:subject.materials["Plabverse"]?.driveId || "ok"},
+    {index:3,title:"Plab Keys",icon:"person",url:url(),driveId:subject.materials["Plab Keys"]?.driveId || "ok"},
 ]
 
 $: questionBanks = [
@@ -98,10 +100,10 @@ $: plabQuestion = {...allQuestions[normalQIndex], next() {
 }
 
 onMount(async () => {
-   wrongQuestions = await plabable.getWrongQuestions({subject:subject})
-   allQuestions = await plabable.getQuestions({subject:subject})
-   bookmarkedQuestions = await plabable.getBookmarkedQuestions({subject:subject})
-   normalQIndex = await plabable.db.getItem(`Users/${username}/plabable/subjects/${subject}/index`) || 0
+   wrongQuestions = await plabable.getWrongQuestions({subject:subject.title})
+   allQuestions = await plabable.getQuestions({subject:subject.title})
+   bookmarkedQuestions = await plabable.getBookmarkedQuestions({subject:subject.title})
+   normalQIndex = await plabable.db.getItem(`Users/${username}/plabable/subjects/${subject.title}/index`) || 0
 })
 
 
@@ -137,7 +139,7 @@ Materials
                     <Link popupClose>Close</Link>
                 </NavRight>
             </Navbar>
-            <iframe title="pdf" src={`https://drive.google.com/file/d/${item.driveId}/preview`} width="100%" height="100%" />
+            <iframe use:log title="pdf" src={`https://drive.google.com/file/d/${item.driveId}/preview`} width="100%" height="100%" />
         </Page>
     </Popup>
   {:else}
@@ -186,7 +188,7 @@ Questions
                 {:else if item.title == "Bookmarks"}
                 <Question question={bookmarkQuestion}/>
                 {:else if item.title == "Gems"}
-                <Gem  {subject}/>
+                <Gem  subject={subject.title}/>
                 {:else}
                 <Question {question}/>
                 {/if}

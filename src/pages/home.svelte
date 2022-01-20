@@ -10,7 +10,7 @@
       <!-- <Searchbar class="searchbar-demo" expandable bind:value={searchBarValue} customSearch onInput="{onSearchBarChange}"/> -->
   </Navbar>
 {#key $subject.title}
-<Custom {...custom}/>
+<Custom subject={$subject}/>
 {/key}
   
   <!-- Toolbar -->
@@ -66,12 +66,10 @@
     Button
   } from 'framework7-svelte';
   let searchBarValue = ""
-  $ : custom = {
-     subject : $subject.title,
-  }
   let popup 
    async function changeSubject(sub){
-    $subject = {title:sub}
+    $subject.title = sub
+    $subject = $subject
     if (popup){
       popup.instance().close()
     }
