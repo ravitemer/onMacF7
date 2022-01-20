@@ -45,10 +45,10 @@ let currentIndex = 0;
 let normalQIndex = 0
 let bookmarkIndex = 0
 function onQBankClick(item){
- console.log(item.popup.instance().open())
+ item.popup.instance().open())
 }
 function onMaterialClick(item){
- console.log(item.popup.instance().open())
+ item.popup.instance().open()
 }
 $: question = {...wrongQuestions[currentIndex], next() {
   currentIndex++;
