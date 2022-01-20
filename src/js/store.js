@@ -1,5 +1,6 @@
 import {writable,get} from "svelte/store";
 import {Plabable, Snippet} from '../api'
+import { Revision } from "../api/study";
 
 export let subject = writable({
  title : "ANATOMY",
@@ -9,6 +10,7 @@ export let user = writable({
     username : "ravitemer",
 });
 export let subjects = writable({})
+export let revision = new Revision({username: get(user).username});
 
  export let plab = new Plabable({username: "ravitemer"});
 

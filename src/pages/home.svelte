@@ -9,9 +9,19 @@
     </NavRight>
       <!-- <Searchbar class="searchbar-demo" expandable bind:value={searchBarValue} customSearch onInput="{onSearchBarChange}"/> -->
   </Navbar>
+
+  
+  
+  
 {#key $subject.title}
 <Custom subject={$subject}/>
 {/key}
+<div>
+  <div class="block-title-medium m-4">
+    Revision
+  </div>
+</div>
+<Chart subject={$subject}/>
   
   <!-- Toolbar -->
   <Toolbar bottom>
@@ -44,6 +54,7 @@
   import { Snippet} from '../api'
   import {subject,plab,user,plabable} from '../js/store'
   import Custom from '../components/Custom.svelte'
+  import Chart from '../components/Chart.svelte'
 
   import {
     Page,
@@ -78,7 +89,7 @@
     }    
   }
 
-
+ 
   let colors = ["bg-red-400","bg-orange-400","bg-yellow-400","bg-green-400","bg-teal-400","bg-blue-400","bg-indigo-400","bg-purple-400","bg-pink-400"]
 </script>
 <style>

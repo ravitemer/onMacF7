@@ -25,6 +25,7 @@ export default {
     assetsInlineLimit: 0,
     emptyOutDir: true,
   },
+  optimizeDeps: { include: ['@carbon/charts'] }, 
   resolve: {
     alias: {
       '@': SRC_DIR,
