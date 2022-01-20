@@ -6,16 +6,22 @@ export let username = "ravitemer";
 import Question from './Question.svelte';
 import Gem from './Gem.svelte';
 import { FirebaseDB,Plabable} from "../api";
+
+//svg url to show on card
+// let url = "https://cdn-icons-png.flaticon.com/512/6643/6643396.png";  
+//random number generator
+let random = 6643396 ;
+let url  = () => `https://cdn-icons-png.flaticon.com/512/6643/${random + Math.floor(Math.random() * 10)}.png`;
 let items = [
-  {index:1,title:"Plabable",icon:"person"},
-    {index:2,title:"Plabverse",icon:"bookmark"},
-    {index:3,title:"Plab Keys",icon:"person"},
+  {index:1,title:"Plabable",icon:"person",url:url()},
+    {index:2,title:"Plabverse",icon:"bookmark",url:url()},
+    {index:3,title:"Plab Keys",icon:"person",url:url()},
 ]
 let questionBanks = [
-    {index:1,title:"Plabable",icon:"person"},
-        {index:2,title:"Bookmarks",icon:"bookmark"},
-        {index:3,title:"Gems",icon:"person"},
-        {index:3,title:"Wrong",icon:"wrong"},
+    {index:1,title:"Plabable",icon:"person",url:url()},
+        {index:2,title:"Bookmarks",icon:"bookmark",url:url()},
+        {index:3,title:"Gems",icon:"person",url:url()},
+        {index:3,title:"Wrong",icon:"wrong",url:url()},
     ]
 
 let plabable = new Plabable({username});
@@ -94,8 +100,10 @@ Materials
 </div>
 <div class="HStack">
   {#each items as item, i  (i)} 
-       <div class="card link {tailwindColors[i]}">
+       <div style="background-image: url({item.url});" class="card link {tailwindColors[i]}">
+
 {item.title}
+
        </div>
   {:else}
        <div class="card">
@@ -108,7 +116,7 @@ Questions
     </div>
     <div class="HStack">
       {#each questionBanks as item, i  (i)} 
-           <div class="card link {tailwindColors[i]}">
+           <div style="background-image: url({item.url});" class="card link {tailwindColors[i]}">
     {item.title}
            </div>
       {:else}
@@ -132,7 +140,7 @@ Questions
 <div class="block-title-large mx-4 mt-4">
     Gems
         </div>
-    <Gem/>
+    <Gem {subject}/>
     
 
 <div class="block-title-large mx-4 mt-4">
@@ -155,9 +163,12 @@ Revision
         @apply h-full w-full overflow-y-scroll;
     }
     .HStack{
-        @apply overflow-x-scroll w-full  flex flex-shrink-0;
+        @apply overflow-x-scroll w-full  flex ;
     }
     .card {
-        @apply w-1/3 p-4 max-w-md min-w-max h-24  flex items-center justify-center flex-shrink-0 text-xl rounded-xl font-medium  md:rounded-2xl border overflow-hidden break-all border-zinc-800; 
+        @apply w-1/3 p-4 max-w-md h-24 bg-contain bg-center bg-no-repeat bg-blend-darken flex items-center justify-center flex-shrink-0 text-xl rounded-xl font-medium  md:rounded-2xl border overflow-hidden break-all border-zinc-800; 
+    }
+    .card-image {
+
     }
 </style>
