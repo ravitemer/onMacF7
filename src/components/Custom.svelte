@@ -45,7 +45,7 @@ let currentIndex = 0;
 let normalQIndex = 0
 let bookmarkIndex = 0
 function onQBankClick(item){
- item.popup.instance().open())
+ item.popup.instance().open()
 }
 function onMaterialClick(item){
  item.popup.instance().open()
