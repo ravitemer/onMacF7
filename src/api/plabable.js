@@ -38,7 +38,7 @@ export class Plabable {
                 this.db.getItem(`/Users/${username}/Plabable/subjects/${subject}`),
                 this.db.getItem(`Plabable/subjects/${subject}/questions`),
             ]) 
-            let questions = subjectData.bookmarks || {};
+            let questions = subjectData?.bookmarks || {};
             let bookmarkedQs = Object.entries(questions).map(([id,value])=> {
                 // let isWrong = Object.values(q).filter(x => !x.isCorrect).length > 0;
               return {...allQs[id],id,bookmarked: value}   
@@ -59,7 +59,7 @@ export class Plabable {
             this.db.getItem(`/Users/${username}/Plabable/subjects/${subject}`),
             this.db.getItem(`Plabable/subjects/${subject}/questions`),
         ]) 
-        let questions = subjectData.questions;
+        let questions = subjectData?.questions || [];
         // filter questions by !isCorrect
         let wrongQs = questions.reduce((res,q,i) => {
             let isWrong = Object.values(q).filter(x => !x.isCorrect).length > 0;

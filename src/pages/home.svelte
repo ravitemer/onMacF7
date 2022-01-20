@@ -2,7 +2,7 @@
   <!-- Top Navbar -->
   <Navbar noHairline  sliding={false}>
     <NavLeft>
-      <span class='ml-w logo'>{$subject.title}</span>
+      <span class='ml-w logo'>{$subject.title.split("_").join(" ")}</span>
     </NavLeft>
     <NavRight>
       <Link  popupOpen=".popup-subjects"><i class="f7-icons text-slate-400">arrow_swap</i></Link>
@@ -70,7 +70,7 @@
   let popup 
    async function changeSubject(sub){
     // $subject.title = sub
-    $subject = sub
+    $subject = {...sub}
     await plab.db.setItem(`Users/${$user.username}/Plabable/currentSubject`,sub.title)
     
     if (popup){
@@ -84,7 +84,7 @@
 <style>
 
   .logo {
-    @apply font-medium  text-xl text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-red-600 ml-2;
+    @apply font-medium  text-sm md:text-lg text-gray-400 ml-2 capitalize;
   }
 
 /*apply horizontal tailwind grid scroll to .horizontal-scroll-view*/
