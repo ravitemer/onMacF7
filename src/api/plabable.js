@@ -8,8 +8,14 @@ export class Plabable {
        }
     async getSubjects() {
         try {
-            let subjects = await this.db.getItem(`/Users/${this.username}/plabable/subjects`)
-            this.subjects = subjects
+            let subjects = await this.db.getItem(`/Subjects/all`)
+            subjects = Object.entries(subjects).map(([title,value]) => {
+							return {
+								title,
+								...value
+							}
+						})
+					this.subjects = subjects
             return subjects
         } catch (error) {       
             throw error

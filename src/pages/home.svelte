@@ -30,8 +30,8 @@
         <Navbar title="Subjects" sliding={false}>
         </Navbar>
         <List inset>
-          {#each Object.entries($plabable.subjects) as [sub,value],i}
-          <ListItem title={sub} href="#" onClick={ async () => await changeSubject(sub)} />
+          {#each $plabable.subjects as sub,i}
+          <ListItem title={sub.title} href="#" onClick={ async () => await changeSubject($plabable.subjects[i])} />
           {/each}
         </List>
      </Page>
@@ -68,12 +68,11 @@
   let searchBarValue = ""
   let popup 
    async function changeSubject(sub){
-    $subject.title = sub
-    $subject = $subject
+    // $subject.title = sub
+    $subject = sub
     if (popup){
       popup.instance().close()
-    }
-    
+    }    
   }
 
 

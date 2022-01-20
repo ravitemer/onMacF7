@@ -22,7 +22,7 @@ let url  = () => {
     console.log(x)
     return `https://cdn-icons-png.flaticon.com/512/6643/${random + Math.floor(Math.random() * 10)}.png`;};
 let materials = [
-  {index:1,title:"Plabable",icon:"person",url:url(),driveId:subject.materials["Plabable"]?.driveId || "ok"},
+  {index:1,title:"Gems",icon:"person",url:url(),driveId:subject.materials["Gems"]?.driveId || "ok"},
     {index:2,title:"Plabverse",icon:"bookmark",url:url(),driveId:subject.materials["Plabverse"]?.driveId || "ok"},
     {index:3,title:"Plab Keys",icon:"person",url:url(),driveId:subject.materials["Plab Keys"]?.driveId || "ok"},
 ]

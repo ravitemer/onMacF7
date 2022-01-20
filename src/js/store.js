@@ -11,13 +11,15 @@ export let user = writable({
 export let subjects = writable({})
 
  let plab = new Plabable({username: "ravitemer"});
+
  export let plabable = writable({
   subjects : plab.subjects,
   });
-
 plab.getSubjects().then(
-    (subjects) => {
-      plabable.set({subjects})}
+    async (subjects) => {
+			subject.set(subjects[0])
+      await plabable.set({subjects})
+		}	
 )
 
 
