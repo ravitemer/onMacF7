@@ -1,30 +1,27 @@
 <script>
 import { onMount } from 'svelte';
 import {f7,Popup, Page,NavLeft,NavRight,Navbar,NavTitle,Link} from "framework7-svelte"
+	
 export let subject = {title:"Anatomy",materials:{}}
 export let username = "ravitemer";
+	
 import Question from './Question.svelte';
 import Gem from './Gem.svelte';
+	
 import { FirebaseDB,Plabable} from "../api";
 function log(node,params){
     console.log("hello")
 }
-//svg url to show on card
-// let url = "https://cdn-icons-png.flaticon.com/512/6643/6643396.png";  
-//random number generator
 let random = 6643396 ;
 let x = 0
-function driveUrl(id = "") {
-		return `https://drive.google.com/uc?export=download&id=${id}`;
-	}
 let url  = () => {
     x++ 
     console.log(x)
     return `https://cdn-icons-png.flaticon.com/512/6643/${random + Math.floor(Math.random() * 10)}.png`;};
 let materials = [
-  {index:1,title:"Gems",icon:"person",url:url(),driveId:subject.materials["Gems"]?.driveId || "ok"},
-    {index:2,title:"Plabverse",icon:"bookmark",url:url(),driveId:subject.materials["Plabverse"]?.driveId || "ok"},
-    {index:3,title:"Plab Keys",icon:"person",url:url(),driveId:subject.materials["Plab Keys"]?.driveId || "ok"},
+  {index:1,title:"Gems",icon:"person",url:url(),driveId:subject.materials["Gems"]?.driveId || "x"},
+    {index:2,title:"Plabverse",icon:"bookmark",url:url(),driveId:subject.materials["Plabverse"]?.driveId || "x"},
+    {index:3,title:"Plab Keys",icon:"person",url:url(),driveId:subject.materials["Plab Keys"]?.driveId || "x"},
 ]
 
 
@@ -45,10 +42,22 @@ function onMaterialClick(item){
  item.popup.instance().open()
 }
 $: questionBanks = [
-    {index:1,title:"Plabable",icon:"person",url:url()},
-        {index:2,title:"Bookmarks",icon:"bookmark",url:url()}, 
-        {index:3,title:"Gems",icon:"person",url:url()},
-        {index:3,title:"Wrong",icon:"wrong",url:url()},
+    {index:1,title:"Plabable",icon:"person",url:url(), exists(){
+			
+			return allQuestions.length > 0
+		}},
+        {index:2,title:"Bookmarks",icon:"bookmark",url:url(),exists(){
+			
+			return bookmarkedQuestions.length > 0
+		}}, 
+        {index:3,title:"Gems",icon:"person",url:url(),exists(){
+			
+			return true
+		}},
+        {index:4,title:"Wrong",icon:"wrong",url:url(), exists(){
+			
+			return wrongQuestions.length > 0
+		}},
     ]
 
 $: question = {...wrongQuestions[currentIndex], next() {
@@ -117,7 +126,8 @@ Materials
 </div>
 <div class="HStack">
   {#each materials as item, i  (i)} 
-  <div on:click={() => onMaterialClick(item)} class="card-con">
+	<div class:hidden={item.driveId === "x"}>
+  <div  on:click={() => onMaterialClick(item)} class="card-con">
     <div  style="background-image: url({item.url});" class="card link {tailwindColors[i]}">
     </div>
     <div class="card-stats">
@@ -143,6 +153,7 @@ Materials
             <iframe use:log title="pdf" src={`https://drive.google.com/file/d/${item.driveId}/preview`} width="100%" height="100%" />
         </Page>
     </Popup>
+	</div>
   {:else}
        <div class="card">
            No Materials
@@ -160,6 +171,7 @@ Questions
     </div>
     <div class="HStack">
       {#each questionBanks as item, i  (i)} 
+			<div class:hidden={item.exists()}>
       <div on:click={() => onQBankClick(item)} class="card-con">
         <div  style="background-image: url({item.url});" class="card link {tailwindColors[i+3]}">
         </div>
@@ -195,6 +207,7 @@ Questions
                 {/if}
             </Page>
         </Popup>
+								</div>
       {:else}
            <div class="card">
                No Question Banks
