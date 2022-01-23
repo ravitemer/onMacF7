@@ -12,7 +12,8 @@
     let popup;
     $: src = `https://www.google.com/search?q=${currentQuery}&igu=1`;
     function onInfoClick(query) {
-        if (!popup) {
+        currentQuery = query;
+        if (false) {
         popup = f7.popup.create({
             content: `
             <div class="popup">
@@ -54,10 +55,18 @@
             }
         });}
 
-        popup.open()
+        popup.instance().open()
 
     }        
 </script>
+<Popup bind:this={popup}>
+    <Page>
+        <Navbar title={currentQuery} sliding />
+        {#if !!currentQuery}
+        <iframe src={src} style="width:100%;height:100%;border:none;"></iframe>
+        {/if}
+    </Page>
+</Popup>
 
 <div class="question-con">
     {#if question.question}
