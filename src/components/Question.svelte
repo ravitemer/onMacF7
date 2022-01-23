@@ -52,7 +52,7 @@
                 }
             }
         });
-        popup.instance().open()
+        popup.open()
 
     }        
 </script>
