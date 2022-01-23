@@ -17,6 +17,13 @@
             content: true ? 
             `
             <div class="sheet-modal" style="height:auto">
+                <div class="toolbar">
+      <div class="toolbar-inner">
+        <div class="left"></div>
+        <div class="right"><a class="link sheet-close" href="#">Done</a></div>
+      </div>
+    </div>
+
                 <div class="sheet-modal-inner">
                     <div class="sheet-modal-swipe-step">
                         <iframe src="https://www.google.com/search?q=${query}&igu=1" style="width:100%;height:100%;border:none;"></iframe>
