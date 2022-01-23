@@ -12,7 +12,7 @@
     let popup;
     $: src = `https://www.google.com/search?q=${currentQuery}&igu=1`;
     function onInfoClick(query) {
-        let popup = f7.popup.create({
+        popup = f7.popup.create({
             content: `
             <div class="popup">
                 <div class="page">
@@ -48,7 +48,7 @@
                     console.log('Popup closed');
                 },
                 closed: () => {
-                    console.log('Popup closed');
+                    popup.destroy();
                 }
             }
         });
