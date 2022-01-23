@@ -7,6 +7,7 @@ export let username = "ravitemer";
 	
 import Question from './Question.svelte';
 import Gem from './Gem.svelte';
+import Google from './google.svelte';
 	
 import { FirebaseDB,Plabable} from "../api";
 function log(node,params){
@@ -113,6 +114,7 @@ onMount(async () => {
 
 
 </script>
+
 <div class="containerr">
 
 <div class="block-title-medium mx-4 mt-4">
@@ -220,7 +222,9 @@ Questions
 
 </div>
 
+<Google>
 
+</Google>
 
 
 

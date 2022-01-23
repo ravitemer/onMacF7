@@ -13,6 +13,12 @@ function next(params) {
       gemsOver = true;
     }
 }
+function prev(params) {
+    currentIndex--;
+    if (currentIndex < 0) {
+      currentIndex = 0;
+    }
+}
 onMount(async () => {
     todayQuestions = await revision.getTodayGems();
     console.log(todayQuestions);
