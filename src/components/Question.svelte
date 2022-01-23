@@ -16,7 +16,7 @@
         popup = f7.sheet.create({
             content: true ? 
             `
-            <div class="sheet-modal" style="height:auto">
+            <div class="sheet-modal h-1/2">
                 <div class="toolbar">
       <div class="toolbar-inner">
         <div class="left"></div>
@@ -25,9 +25,9 @@
     </div>
 
                 <div class="sheet-modal-inner">
-                    <div class="sheet-modal-swipe-step">
+                    <div class="page-content">
                         <iframe src="https://www.google.com/search?q=${query}&igu=1" style="width:100%;height:100%;border:none;"></iframe>
-                        </div>
+                    </div>
                     </div>
                 </div>
             `
