@@ -1,10 +1,12 @@
 <script>
     import { onMount } from "svelte";
+    import Google from './google.svelte';
     export let question = {}
     let showAnswer = true
     onMount(() => {
 
     });
+    $: options = {A:question.A,B:question.B,C:question.C,D:question.D,E:question.E}
         
 </script>
 <div class="question-con">
@@ -22,13 +24,14 @@
     {question.question}
 </div>
 <div class="options">
-    {#each Object.entries({A:question.A,B:question.B,C:question.C,D:question.D,E:question.E}) as [option,value],i}
+    {#each Object.entries(options) as [option,value],i}
          <div class="option">
             {value}
          </div>
     {/each}
 </div>
 {#if showAnswer}
+<Google queries={Object.values(options)}/>
     <div class="answer">
         {question.explanation}
     </div>

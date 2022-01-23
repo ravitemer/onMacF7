@@ -7,7 +7,7 @@ export let username = "ravitemer";
 	
 import Question from './Question.svelte';
 import Gem from './Gem.svelte';
-import Google from './google.svelte';
+
 	
 import { FirebaseDB,Plabable} from "../api";
 function log(node,params){
@@ -222,9 +222,7 @@ Questions
 
 </div>
 
-<Google>
 
-</Google>
 
 
 
