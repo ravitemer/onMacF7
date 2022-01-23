@@ -59,9 +59,13 @@
 
     }        
 </script>
-<Popup bind:this={popup}>
+<Popup  push swipeToClose closeByBackdropClick closeOnEscape bind:this={popup}>
     <Page>
-        <Navbar title={currentQuery} sliding />
+        <Navbar title={currentQuery} sliding>
+            <div class="right">
+                <a href="#" class="link popup-close">Close</a>
+            </div>
+        </Navbar> 
         {#if !!currentQuery}
         <iframe src={src} style="width:100%;height:100%;border:none;"></iframe>
         {/if}
