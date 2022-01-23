@@ -14,7 +14,18 @@
         currentQuery = query;
         if (true) {
         popup = f7.popup.create({
-            content: `
+            content: true ? 
+            `
+            <div class="sheet-modal" style="height:auto">
+                <div class="sheet-modal-inner">
+                    <div class="sheet-modal-swipe-step">
+                        <iframe src="https://www.google.com/search?q=${query}&igu=1" style="width:100%;height:100%;border:none;"></iframe>
+                        </div>
+                    </div>
+                </div>
+            `
+            
+            : `
             <div class="popup">
                 <div class="page">
                     <div class="navbar">
@@ -38,6 +49,7 @@
             closeByOutsideClick: true,
             push : true,
             swipeToClose: "to-bottom",
+            swipeToStep:true,
             on: {
                 open: () => {
                     console.log('Popup opened');
