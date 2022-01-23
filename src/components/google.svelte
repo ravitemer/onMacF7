@@ -33,7 +33,7 @@
 
 <style lang="postcss">
  .iframe-con {
-      @apply bg-gray-800 h-full w-6/12  snap-center rounded-3xl relative flex-shrink-0 ml-4;
+      @apply bg-gray-800 h-full w-6/12 overflow-hidden snap-center rounded-3xl relative flex-shrink-0 ml-4;
  }
  iframe {
         @apply w-full h-full border-0;
