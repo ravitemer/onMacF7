@@ -13,7 +13,7 @@
     function onInfoClick(query) {
         currentQuery = query;
         if (true) {
-        popup = f7.popup.create({
+        popup = f7.sheet.create({
             content: true ? 
             `
             <div class="sheet-modal" style="height:auto">
