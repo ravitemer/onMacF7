@@ -12,7 +12,7 @@
     let popup;
     function onInfoClick(query) {
         currentQuery = query;
-        if (true) {
+        if (false) {
         popup = f7.sheet.create({
             content: true ? 
             `
@@ -70,7 +70,7 @@
             }
         });}
 
-        popup.open()
+//         popup.open()
 
     }        
 </script>
@@ -110,9 +110,9 @@
           <div class="option-label">
         {value}
           </div>
-          <div on:click={() => onInfoClick(value)} class="option-info">
+          <a href={search(value)} class=" external link option-info">
             <i class="f7-icons  link text-color-primary">info_circle</i>
-          </div>
+          </a>
         
           </div>
         
