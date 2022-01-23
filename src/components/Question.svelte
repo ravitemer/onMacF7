@@ -12,7 +12,6 @@
     let popup;
     $: src = `https://www.google.com/search?q=${currentQuery}&igu=1`;
     function onInfoClick(query) {
-        currentQuery = query;
         let popup = f7.popup.create({
             content: `
             <div class="popup">
