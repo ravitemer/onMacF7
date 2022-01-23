@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import {Popup, Page, Navbar} from "framework7-svelte";
+    import {f7,Popup, Page, Navbar} from "framework7-svelte";
     export let question = {}
     let showAnswer = true
     const search = (term) => `https://www.google.com/search?q=${term}&igu=1`;
@@ -13,15 +13,51 @@
     $: src = `https://www.google.com/search?q=${currentQuery}&igu=1`;
     function onInfoClick(query) {
         currentQuery = query;
+        let popup = f7.popup.create({
+            content: `
+            <div class="popup">
+                <div class="page">
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="title">${query}</div>
+
+                        </div>
+                        <div class="right">
+                                <a href="#" class="link popup-close">Close</a>
+                            </div>
+                    </div>
+                    <div class="page-content">
+                        <iframe src="https://www.google.com/search?q=${query}&igu=1" style="width:100%;height:100%;border:none;"></iframe>
+                    </div>
+                </div>
+            `,
+            cssClass: 'popup-iframe',
+            backdrop: true,
+            animate: true,
+            closeByBackdropClick: true,
+            closeByOutsideClick: true,
+            push : true,
+            swipeToClose: "to-bottom",
+            on: {
+                open: () => {
+                    console.log('Popup opened');
+                },
+                opened: () => {
+                    console.log('Popup opened');
+                },
+                close: () => {
+                    console.log('Popup closed');
+                },
+                closed: () => {
+                    console.log('Popup closed');
+                }
+            }
+        });
         popup.instance().open()
 
     }        
 </script>
-<Popup bind:this={popup} class='option-popup'>
-    <Page>
-     <iframe class="option-iframe" title="Option-popup" {src}></iframe>
-    </Page>
-</Popup>
+
 <div class="question-con">
     {#if question.question}
     <div class="buttons">
