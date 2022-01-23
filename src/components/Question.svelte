@@ -1,14 +1,27 @@
 <script>
     import { onMount } from "svelte";
-    import Google from './google.svelte';
+    import {Popup, Page, Navbar} from "framework7-svelte";
     export let question = {}
     let showAnswer = true
+    const search = (term) => `https://www.google.com/search?q=${term}&igu=1`;
     onMount(() => {
 
     });
     $: options = {A:question.A,B:question.B,C:question.C,D:question.D,E:question.E}
-        
+    let currentQuery = ""
+    let popup;
+    $: src = `https://www.google.com/search?q=${currentQuery}&igu=1`;
+    function onInfoClick(query) {
+        currentQuery = query;
+        popup.instance().open()
+
+    }        
 </script>
+<Popup bind:this={popup} class='option-popup'>
+    <Page>
+     <iframe class="option-iframe" title="Option-popup" {src}></iframe>
+    </Page>
+</Popup>
 <div class="question-con">
     {#if question.question}
     <div class="buttons">
@@ -25,13 +38,22 @@
 </div>
 <div class="options">
     {#each Object.entries(options) as [option,value],i}
-         <div class="option">
-            {value}
-         </div>
+    <div class="option">
+        <div class="option-value link">
+          {option}
+          </div>
+          <div class="option-label">
+        {value}
+          </div>
+          <div on:click={() => onInfoClick(value)} class="option-info">
+            <i class="f7-icons  link text-color-primary">info_circle</i>
+          </div>
+        
+          </div>
+        
     {/each}
 </div>
 {#if showAnswer}
-<Google queries={Object.values(options)}/>
     <div class="answer">
         {question.explanation}
     </div>
@@ -57,7 +79,16 @@
         @apply flex flex-wrap flex-col gap-4  justify-center  m-2;
     }
     .option {
-        @apply text-base md:text-xl  ;
+        @apply w-full flex justify-start p-3 border rounded-2xl border-zinc-600 items-center; 
+    }
+    .option-value {
+        @apply flex-shrink-0  flex items-center justify-center w-8 h-8 mr-4  font-semibold text-xl rounded-full bg-zinc-700  ; 
+    }
+    .option-label {
+        @apply text-center text-sm font-medium flex-shrink text-ellipsis truncate;
+    }
+    .option-info {
+        @apply text-sm font-medium ml-auto;
     }
     .answer {
     

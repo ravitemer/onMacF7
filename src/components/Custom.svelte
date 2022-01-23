@@ -116,6 +116,18 @@ onMount(async () => {
 </script>
 
 <div class="containerr">
+  <div class="option">
+<div class="option-value link">
+  A
+  </div>
+  <div class="option-label">
+Inflammatory Bowel Disease    
+  </div>
+  <div class="option-info">
+    <i class="f7-icons  link text-color-primary">info_circle</i>
+  </div>
+
+  </div>
 
 <div class="block-title-medium mx-4 mt-4">
 Materials
@@ -248,5 +260,17 @@ Questions
     }
     .card-title {
         @apply text-center text-lg font-medium;
+    }
+    .option {
+        @apply w-full flex justify-start p-3 border rounded-2xl border-zinc-600 items-center; 
+    }
+    .option-value {
+        @apply flex-shrink-0  flex items-center justify-center w-8 h-8 mr-4  font-semibold text-xl rounded-full bg-zinc-700  ; 
+    }
+    .option-label {
+        @apply text-center text-sm font-medium flex-shrink text-ellipsis truncate;
+    }
+    .option-info {
+        @apply text-sm font-medium ml-auto;
     }
 </style>
