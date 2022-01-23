@@ -11,8 +11,8 @@
 <div class="g-link">
     <!-- <iframe seamless lazy='true' src={search(item)} title='Google iframe'/> -->
     <Link  class="external bg-slate-900 space-x-2 m-1 px-2 py-1 rounded-3xl flex flex-wrap" href={search(item)}>
-     <i style="font-size:20px;" class='flex items-center justify-center rounded-full f7-icons  text-color-primary'>link</i>
-     <div class="text-lg truncate w-16 text-ellipsis ">{item}</div>
+     <i style="font-size:18px;" class='flex items-center justify-center rounded-full f7-icons  text-color-primary'>link</i>
+     <div class="text-md truncate w-16 text-ellipsis ">{item}</div>
    </Link>
    </div>   
 {:else}
@@ -33,6 +33,6 @@
         @apply w-full h-full border-0;
  }
  .hstack {
-    @apply w-full min-w-max min-h-max flex flex-wrap items-center;
+    @apply w-full flex flex-wrap items-center;
  }
 </style>
