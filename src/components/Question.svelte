@@ -10,11 +10,9 @@
     $: options = {A:question.A,B:question.B,C:question.C,D:question.D,E:question.E}
     let currentQuery = ""
     let popup;
-    let iframeHTML = ""
     function onInfoClick(query) {
         currentQuery = query;
-        iframeHTML = `<iframe src="https://www.google.com/search?q=${currentQuery}&igu=1" style="width:100%;height:100%;border:none;"></iframe>`
-        if (false) {
+        if (true) {
         popup = f7.popup.create({
             content: `
             <div class="popup">
@@ -51,16 +49,16 @@
                     console.log('Popup closed');
                 },
                 closed: () => {
-                    // popup.destroy();
+                    popup.destroy();
                 }
             }
         });}
 
-        popup.instance().open()
+        popup.open()
 
     }        
 </script>
-<Popup  push swipeToClose closeByBackdropClick closeOnEscape bind:this={popup}>
+<!-- <Popup  push swipeToClose closeByBackdropClick closeOnEscape bind:this={popup}>
     <Page>
         <Navbar title={currentQuery} sliding>
             <div class="right">
@@ -71,7 +69,7 @@
          {@html iframeHTMl}
         {/if}
     </Page>
-</Popup>
+</Popup> -->
 
 <div class="question-con">
     {#if question.question}
