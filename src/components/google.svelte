@@ -39,6 +39,6 @@
         @apply w-full h-full border-0;
  }
  .hstack {
-    @apply h-1/2 w-full flex overflow-scroll snap-x snap-mandatory;
+    @apply h-3/4 w-full flex overflow-scroll snap-x snap-mandatory;
  }
 </style>
