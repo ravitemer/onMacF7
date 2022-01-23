@@ -16,16 +16,9 @@
         popup = f7.sheet.create({
             content: true ? 
             `
-            <div class="sheet-modal h-1/2">
-                <div class="toolbar">
-      <div class="toolbar-inner">
-        <div class="left"></div>
-        <div class="right"><a class="link sheet-close" href="#">Done</a></div>
-      </div>
-    </div>
-
+            <div class="sheet-modal h-4/6">
                 <div class="sheet-modal-inner">
-                    <div class="page-content">
+                    <div class="page-content m-0 p-0">
                         <iframe src="https://www.google.com/search?q=${query}&igu=1" style="width:100%;height:100%;border:none;"></iframe>
                     </div>
                     </div>
