@@ -12,6 +12,7 @@
     let popup;
     $: src = `https://www.google.com/search?q=${currentQuery}&igu=1`;
     function onInfoClick(query) {
+        if (!popup) {
         popup = f7.popup.create({
             content: `
             <div class="popup">
@@ -48,10 +49,11 @@
                     console.log('Popup closed');
                 },
                 closed: () => {
-                    popup.destroy();
+                    // popup.destroy();
                 }
             }
-        });
+        });}
+
         popup.open()
 
     }        
