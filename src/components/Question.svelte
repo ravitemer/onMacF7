@@ -18,9 +18,13 @@
             `
             <div class="sheet-modal h-4/6">
                 <div class="sheet-modal-inner">
+                <div class="view">
+                  <div class="page">
                     <div class="page-content m-0 p-0">
                         <iframe src="https://www.google.com/search?q=${query}&igu=1" style="width:100%;height:100%;border:none;"></iframe>
                     </div>
+                    </div>
+                 </div>
                     </div>
                 </div>
             `
