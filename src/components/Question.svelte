@@ -66,7 +66,7 @@
             }
         });}
 
-        popup.open()
+        popup.stepToggle()
 
     }        
 </script>
