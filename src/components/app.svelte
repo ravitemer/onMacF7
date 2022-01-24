@@ -116,7 +116,7 @@
     ListButton,
     BlockFooter
   } from 'framework7-svelte';
-  import FirebaseAuth from "../api/firebase/FirebaseAuth"
+  import FirebaseAuth from "../api/firebase/FirebaseAuth.svelte"
   import AuthUI from "./Auth.svelte"
 
   import routes from '../js/routes';
