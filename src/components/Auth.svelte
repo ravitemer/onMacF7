@@ -1,5 +1,5 @@
 <script>
-	import {initAuth} from "./auth.js"
+	//import {initAuth} from "./auth.js"
 	export let loginWithProvider = () => {}
 		export let loginWithEmailPassword = () => {}
 			export let signUp = () => {}
