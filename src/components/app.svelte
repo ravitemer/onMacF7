@@ -84,8 +84,9 @@
         </BlockFooter>
       </Page>
     </View>
-  </LoginScreen>	{:else}
-	<AuthUI providers={["google","email"]} {loginWithProvider} {loginWithEmailPassword} {signUp}/>
+  </LoginScreen>
+  {:else}
+	  <AuthUI providers={["google","email"]} {loginWithProvider} {loginWithEmailPassword} {signUp}/>
 	{/if}
 </FirebaseAuth>
 </App>
