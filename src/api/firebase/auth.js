@@ -36,7 +36,7 @@ async  function loginWithEmailPassword (email, password)
 	
 async 	function loginWithProvider(provider){
     const providers = {
-			google : new GoogleAuthProvider
+			google : new GoogleAuthProvider()
 		}
 try {
 	if (useRedirect) {
