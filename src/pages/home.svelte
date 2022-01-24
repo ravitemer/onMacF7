@@ -1,18 +1,22 @@
 <Page  name="home">
-  <!-- Top Navbar -->
-  <Navbar noHairline  sliding={false}>
-    <NavLeft>
-      <span class='ml-w logo'>{$subject.title.split("_").join(" ")}</span>
-    </NavLeft>
-    <NavRight>
-      <Link  popupOpen=".popup-subjects"><i class="f7-icons text-slate-400">arrow_swap</i></Link>
-    </NavRight>
-      <!-- <Searchbar class="searchbar-demo" expandable bind:value={searchBarValue} customSearch onInput="{onSearchBarChange}"/> -->
-  </Navbar>
-
   
-  
-  
+<FirebaseAuth 
+							let:user 
+							let:logout 
+							let:loginWithProvider 
+							let:loginWithEmailPassword
+							let:signUp> 
+{#if user}
+<!-- Top Navbar -->
+<Navbar noHairline  sliding={false}>
+  <NavLeft>
+    <span class='ml-w logo'>{$subject.title.split("_").join(" ")}</span>
+  </NavLeft>
+  <NavRight>
+    <Link  popupOpen=".popup-subjects"><i class="f7-icons text-slate-400">arrow_swap</i></Link>
+  </NavRight>
+    <!-- <Searchbar class="searchbar-demo" expandable bind:value={searchBarValue} customSearch onInput="{onSearchBarChange}"/> -->
+</Navbar>
 {#key $subject.title}
 <Custom subject={$subject}/>
 {/key}
@@ -47,6 +51,15 @@
      </Page>
   </Popup>
 
+
+{:else}
+<AuthUI providers={["google","email"]} {loginWithProvider} {loginWithEmailPassword} {signUp}/>
+{/if}
+
+</FirebaseAuth>
+
+  
+  
   
 </Page>
 <script>
@@ -55,6 +68,9 @@
   import {subject,plab,user,plabable} from '../js/store'
   import Custom from '../components/Custom.svelte'
   import Chart from '../components/Chart.svelte'
+  import FirebaseAuth from "../api/firebase/FirebaseAuth.svelte"
+  import AuthUI from "../components/Auth.svelte"
+
 
   import {
     Page,

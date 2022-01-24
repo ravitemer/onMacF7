@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import {f7,Popup, Page, Navbar} from "framework7-svelte";
+    import {f7} from "framework7-svelte";
     export let question = {}
     let showAnswer = true
     const search = (term) => `https://www.google.com/search?q=${term}&igu=1`;
