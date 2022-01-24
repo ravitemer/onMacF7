@@ -1,5 +1,11 @@
 <App themeDark { ...f7params } >
-
+<FirebaseAuth 
+							let:user 
+							let:logout 
+							let:loginWithProvider 
+							let:loginWithEmailPassword 
+							let:signUp> 
+{#if user}
   <!-- Left panel with cover effect when hidden -->
   <Panel left cover themeDark visibleBreakpoint={960}>
     <View>
@@ -78,7 +84,10 @@
         </BlockFooter>
       </Page>
     </View>
-  </LoginScreen>
+  </LoginScreen>	{:else}
+	<AuthUI providers={["google","email"]} {loginWithProvider} {loginWithEmailPassword} {signUp}/>
+	{/if}
+</FirebaseAuth>
 </App>
 <script>
   import { onMount } from 'svelte';
@@ -106,7 +115,8 @@
     ListButton,
     BlockFooter
   } from 'framework7-svelte';
-
+  import FirebaseAuth from "../api/firebase/FirebaseAuth"
+  import AuthUI from "./Auth.svelte"
 
   import routes from '../js/routes';
   
