@@ -1,4 +1,4 @@
-<App themeDark { ...f7params } >
+<App { ...f7params } >
   <!-- Left panel with cover effect when hidden -->
   <Panel left cover themeDark visibleBreakpoint={960}>
     <View>

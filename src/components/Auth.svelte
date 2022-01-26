@@ -3,7 +3,10 @@
 	export let loginWithProvider = () => {}
 	export let loginWithEmailPassword = () => {}
 	export let signUp = () => {}
-	export let providers = []
+	export let providers = [{title: "google" ,logo:"logo_google",color:"#4285f4"},
+							{title: "facebook" ,logo:"logo_facebook",color:"#3b5998"},
+							{title: "twitter",logo:"logo_twitter",color:"#55acee"},
+							{title:"github",logo:"logo_github",color:"#333"}]	
 	let email = ""
 	let password = ""
 	let icons = {
@@ -11,44 +14,41 @@
 		"github" : "github_logo",
 		"twitter" : "twitter_logo",
 	}
-</script>
+	let isSignUp = false
+</script> 
 <div class="auth-con">
 	<div class="header">
 	  <img class="header-img" src="https://picsum.photos/300" />
 	  <div class="header-text">
-		Sign in to your account
-		<div class="header-subtitle">Or <a>start your 14 day trail</a></div>
+		{isSignUp ? "Create " : "Sign in to"} your account
+		<div on:click={() => isSignUp = true } class="header-subtitle">Or <span  class="link a"> start your 14 day trail</span></div>
 	  </div>
 	</div>
   
 	<!--  -->
 	<div class="inputs-con">
 	  <div class="inputbox">
-		<div class="input-con">
+		  <div class="input-con">
 		  <label class="input-label">Email address</label>
-		  <input class="input" type="text" />
+		  <input class="input" type="email" bind:value={email}/>
 		</div>
 		<div class="input-con">
 		  <label for="d" class="input-label">Password</label>
-		  <input class="input" />
+		  <input class="input" type="password" bind:value={password}/>
 		</div>
 	  </div>
 	  <div class="input-foot">
-		<a class="forgot">Forgot your password?</a>
+		<div class="a forgot">Forgot your password?</div>
 	  </div>
-	  <div class="signin">Sign in</div>
+	  <div on:click={() => loginWithEmailPassword(email,password)} class="signin">Sign in</div>
   
 	  <div class="divider">Or continue with</div>
 	  <div class="providers">
-		<div class="provider">
-		  <a href=""></a>
-		</div>
-		<div class="provider">
-		  <a></a>
-		</div>
-		<div class="provider">
-		  <a></a>
-		</div>
+		  {#each providers as provider}
+		  <div class="provider" on:click={() => loginWithProvider(provider.title) }>
+			<i class="f7-icons" >logo_{provider.logo}</i>
+		  </div>
+		  {/each}
 	  </div>
 	</div>
   </div>
@@ -71,7 +71,7 @@
 .header-text .header-subtitle {
   @apply text-sm font-normal text-center;
 }
-.header-text .header-subtitle a {
+.header-text .header-subtitle .a {
   @apply text-purple-600 text-sm font-semibold;
 }
 
@@ -79,10 +79,7 @@
   @apply flex justify-center space-x-4 ;
 }
 .provider {
-  @apply flex items-center justify-center flex-shrink-0 flex-auto h-10 border-[1px] border-gray-300 shadow rounded-lg;
-}
-.provider a {
-  @apply w-5 h-5 bg-gray-600 rounded-full;
+  @apply text-zinc-500 flex items-center justify-center flex-shrink-0 flex-auto h-10 border-[1px] border-gray-300 shadow rounded-lg;
 }
 .divider {
   @apply text-center text-gray-500 py-4  text-sm;
